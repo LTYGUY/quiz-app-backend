@@ -1,0 +1,9 @@
+.vscode/
+
+.gitignore
+.prettierrc
+Dockerfile
+
+*.sh
+*.md
+*.pyc
