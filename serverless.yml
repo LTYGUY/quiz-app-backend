@@ -84,5 +84,5 @@ resources:
           -
             AttributeName: id
             KeyType: HASH
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        TableName: ${self:service}-${sls:stage}
   
