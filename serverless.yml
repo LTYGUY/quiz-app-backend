@@ -1,0 +1,89 @@
+service: quiz-app-backend
+
+plugins:
+  - serverless-python-requirements
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-southeast-1
+  httpApi:
+    cors: true
+  environment:
+    QUIZZES_TABLE: ${self:service}-${sls:stage}
+    AWS_REGION: ${self:provider.region}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:DescribeTable
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+package:
+  exclude:
+    - node_modules/**
+    - README.md
+    - package.json
+    - package-lock.json
+    - requirements.txt
+
+functions:
+
+  create:
+    handler: quizzes/create.create
+    timeout: 5
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /quizzes
+          method: POST
+
+  list:
+    handler: quizzes/list.list
+    timeout: 5
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /quizzes
+          method: GET
+
+  get:
+    handler: quizzes/get.get
+    timeout: 5
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /quizzes/{id}
+          method: GET
+
+  delete:
+    handler: quizzes/delete.delete
+    timeout: 5
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /quizzes/{id}
+          method: DELETE
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+  
