@@ -24,7 +24,7 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
             - dynamodb:DescribeTable
-          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+          Resource: "arn:aws:dynamodb:${self:provider:environment:AWS_REGION}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
   exclude:
