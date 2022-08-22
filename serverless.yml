@@ -24,7 +24,6 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
             - dynamodb:DescribeTable
-          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
   exclude:
@@ -85,3 +84,5 @@ resources:
           -
             AttributeName: id
             KeyType: HASH
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+  
