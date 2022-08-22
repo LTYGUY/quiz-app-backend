@@ -85,5 +85,3 @@ resources:
           -
             AttributeName: id
             KeyType: HASH
-        TableName: ${self:service}-${sls:stage}
-  
