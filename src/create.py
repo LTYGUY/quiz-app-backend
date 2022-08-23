@@ -18,10 +18,12 @@ def create(event: ResponseType, _) -> ResponseType:
     elif 'QuizList' not in data:
         return error_response(422, 'No quizzes were found.')
 
+    device_id: int = data['DeviceID']
+    del data['DeviceID']
+
     quizzes = Quizzes(
-        device_id=data['DeviceID'],
-        modified_time=data['Timestamp'],
-        quizzes=dumps(data['QuizList'])
+        device_id=device_id,
+        quizzes=dumps(data)
     )
 
     quizzes.save()
