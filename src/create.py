@@ -20,6 +20,8 @@ def create(event: ResponseType, _) -> ResponseType:
 
     device_id: int = data['DeviceID']
     del data['DeviceID']
+    
+    print(data)
 
     quizzes = Quizzes(
         device_id=device_id,
