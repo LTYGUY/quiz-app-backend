@@ -1,14 +1,17 @@
+from json import loads
+
 from src.helpers import ResponseType, error_response, respond_with_data
 from src.model import Quizzes
 
 
 def create(event: ResponseType, _) -> ResponseType:
 
-    data = event['body']
-    print(data)
-    print(type(data))
+    data = loads(event.get('body'))
 
-    if 'DeviceID' not in data:
+    if not data:
+        return error_response(422, 'No body provided.')
+
+    elif 'DeviceID' not in data:
         return error_response(422, 'DeviceID is not found')
 
     elif 'QuizList' not in data:
