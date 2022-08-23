@@ -4,6 +4,7 @@ from src.model import Quizzes
 
 def create(event, _):
 
+    print(event)
     if 'DeviceID' not in event:
         return error_response(422, 'DeviceID is not found')
 
