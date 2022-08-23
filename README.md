@@ -1,3 +1,7 @@
-# aws-lambda-cicd-test
+# quiz-app-backend
 
-testing stuff, deleting tomorrow or something (:
+Serverless backend for [quiz-app](https://github.com/LTYGUY/quiz-app).
+
+## Architecture
+
+Unity -> AWS Lambda -> AWS DynamoDB
