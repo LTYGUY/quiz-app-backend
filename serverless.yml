@@ -36,7 +36,7 @@ package:
 functions:
 
   create:
-    handler: quizzes/create.create
+    handler: src/create.create
     timeout: 5
     memorySize: 128
     events:
@@ -45,7 +45,7 @@ functions:
           method: POST
 
   list:
-    handler: quizzes/list.list
+    handler: src/list.list
     timeout: 5
     memorySize: 128
     events:
@@ -54,7 +54,7 @@ functions:
           method: GET
 
   get:
-    handler: quizzes/get.get
+    handler: src/get.get
     timeout: 5
     memorySize: 128
     events:
@@ -63,7 +63,7 @@ functions:
           method: GET
 
   delete:
-    handler: quizzes/delete.delete
+    handler: src/delete.delete
     timeout: 5
     memorySize: 128
     events:
