@@ -10,7 +10,7 @@ def get(event: ResponseType, _) -> ResponseType:
 
     try:
         print(event)
-        quizzes = Quizzes.get(hash_key=event['rawPath'])
+        quizzes = Quizzes.get(hash_key=event['pathParameters']['device_id'])
 
     except (DoesNotExist, KeyError):
         return error_response(404, 'Quiz not found')
