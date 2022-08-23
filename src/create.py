@@ -1,7 +1,7 @@
 from json import loads
 
 from src.helpers import ResponseType, error_response, response
-from src.model import Question, Quiz, Quizzes
+from src.model import Quizzes
 
 
 def create(event: ResponseType, _) -> ResponseType:

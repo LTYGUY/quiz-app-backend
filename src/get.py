@@ -2,7 +2,7 @@ from json import dumps
 
 from pynamodb.exceptions import DoesNotExist
 
-from src.helpers import ResponseType, error_response, response
+from src.helpers import ResponseType, error_response
 from src.model import Quizzes
 
 
