@@ -1,6 +1,6 @@
 from pynamodb.exceptions import DoesNotExist
 
-from src.helpers import ResponseType, error_response, respond_with_data
+from src.helpers import ResponseType, error_response, response
 from src.model import Quizzes
 
 
@@ -12,4 +12,4 @@ def get(event: ResponseType, _) -> ResponseType:
     except DoesNotExist:
         return error_response(404, 'Quiz not found')
 
-    return respond_with_data(200, quiz)
+    return response(200, "Quiz found")

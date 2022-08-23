@@ -1,6 +1,6 @@
 from json import loads
 
-from src.helpers import ResponseType, error_response, respond_with_data
+from src.helpers import ResponseType, error_response, response
 from src.model import Question, Quiz, Quizzes
 
 
@@ -32,4 +32,4 @@ def create(event: ResponseType, _) -> ResponseType:
     )
 
     quizzes.save()
-    return respond_with_data(201, quizzes)
+    return response(201, f"Quizzes created for {data['DeviceID']}")
