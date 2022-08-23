@@ -9,6 +9,7 @@ from src.model import Quizzes
 def get(event: ResponseType, _) -> ResponseType:
 
     try:
+        print(event)
         quizzes = Quizzes.get(hash_key=event['path']['device_id'])
 
     except DoesNotExist:
