@@ -1,4 +1,4 @@
-from json import loads
+from json import loads, dumps
 
 from src.helpers import ResponseType, error_response, response
 from src.model import Quizzes
@@ -21,7 +21,7 @@ def create(event: ResponseType, _) -> ResponseType:
     quizzes = Quizzes(
         device_id=data['DeviceID'],
         modified_time=data['Timestamp'],
-        quizzes=data['QuizList']
+        quizzes=dumps(data['QuizList'])
     )
 
     quizzes.save()
