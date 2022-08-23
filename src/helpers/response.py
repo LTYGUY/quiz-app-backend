@@ -11,13 +11,6 @@ def response(status, message) -> ResponseType:
         })
     }
 
-def respond_with_data(status, data) -> ResponseType:
-
-    return {
-        'status': status,
-        'body': dumps(dict(data))
-    }
-
 def error_response(status, error_message) -> ResponseType:
 
     return {

@@ -53,15 +53,6 @@ functions:
           path: /quizzes/{device_id}
           method: GET
 
-  delete:
-    handler: src/delete.delete
-    timeout: 5
-    memorySize: 128
-    events:
-      - httpApi:
-          path: /quizzes/{device_id}
-          method: DELETE
-
 resources:
   Resources:
     QuizzesTable:
