@@ -1,30 +1,22 @@
-from json import loads
-
 from src.helpers import error_response, respond_with_data
-from src.model import Quiz
+from src.model import Quizzes
 
 
-def create(event, context):
+def create(event, _):
 
-    data = loads(event['body'])
-    print(data)
-    return
+    if 'DeviceID' not in event:
+        return error_response(422, 'DeviceID is not found')
 
-    if 'quiz' not in data:
-        return error_response(422, 'No quiz was found.')
+    elif 'QuizList' not in event:
+        return error_response(422, 'No quizzes were found.')
 
-    elif 'QuizName' not in data:
+    elif not event['QuizList']['QuizName']:
         return error_response(422, 'No quiz name was found.')
 
-    elif not data['quiz']:
-        return error_response(422, 'Quiz has no content.')
-
-    elif not data['quiz_name']:
-        return error_response(422, 'Quiz name has no content.')
-
-    quiz = Quiz(
-        quiz_name=data['QuizName'],
-        questions=data['Question']
+    quiz = Quizzes(
+        device_id=event['DeviceID'],
+        quiz_name=event['QuizList'],
+        modified_time=event['Timestamp']
     )
 
     quiz.save()

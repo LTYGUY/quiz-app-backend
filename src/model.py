@@ -8,10 +8,14 @@ from pynamodb.models import Model
 class Question(MapAttribute):
 
     question = UnicodeAttribute()
-    answers = ListAttribute(of=UnicodeAttribute)
+    options = ListAttribute(of=UnicodeAttribute)
     answer_index = NumberAttribute()
 
-class Quiz(Model):
+class Quiz(MapAttribute):
+
+    quiz_name = UnicodeAttribute(hash_key=True, null=False)
+    questions = ListAttribute(of=Question)
+class Quizzes(Model):
 
     class Meta:
 
@@ -19,10 +23,10 @@ class Quiz(Model):
         region = 'ap-southeast-1'
         host = f'https://dynamodb.{region}.amazonaws.com'
 
-    quiz_name = UnicodeAttribute(hash_key=True, null=False)
+    device_id = UnicodeAttribute(hash_key=True)
+    quizzes = ListAttribute(of=Quiz)
     modified_time =UnicodeAttribute(null=False)
-    questions = ListAttribute(of=Question)
 
     def save(self, *_):
         
-        super(Quiz, self).save()
+        super(Quizzes, self).save()
