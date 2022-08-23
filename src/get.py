@@ -13,8 +13,6 @@ def get(event: ResponseType, _) -> ResponseType:
 
     except (DoesNotExist, KeyError):
         return error_response(404, 'Quiz not found')
-
-    print(quizzes)
     
     return {
         'statusCode': 200,
