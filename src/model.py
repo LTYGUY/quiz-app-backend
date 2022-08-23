@@ -8,8 +8,8 @@ from pynamodb.models import Model
 class Question(MapAttribute):
 
     question = UnicodeAttribute()
-    options = ListAttribute(of=UnicodeAttribute)
     answer_index = NumberAttribute()
+    options = ListAttribute(of=UnicodeAttribute)
 
 class Quiz(MapAttribute):
 
