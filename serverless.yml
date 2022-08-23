@@ -11,25 +11,27 @@ provider:
     cors: true
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:DescribeTable
-      Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+  iam:
+    role:
+      Statements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+          - dynamodb:DescribeTable
+        Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
-  exclude:
-    - node_modules/**
-    - README.md
-    - package.json
-    - package-lock.json
-    - requirements.txt
+  patterns:
+    - '!node_modules/**'
+    - '!README.md'
+    - '!package.json'
+    - '!package-lock.json'
+    - '!requirements.txt'
 
 functions:
 
