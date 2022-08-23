@@ -19,16 +19,9 @@ def create(event: ResponseType, _) -> ResponseType:
         return error_response(422, 'No quizzes were found.')
 
     quizzes = Quizzes(
-        device_id=data.get('DeviceID'),
-        modified_time=data.get('Timestamp'),
-        quizzes=[Quiz(
-            quiz_name=quiz['QuizName'],
-            questions=[Question(
-                question=question['Query'],
-                answer_index=question['AnswerIndex'],
-                options=question['OptionList'],
-            ) for question in quiz['QuestionList']]
-        ) for quiz in data['QuizList']]
+        device_id=data['DeviceID'],
+        modified_time=data['Timestamp'],
+        quizzes=data['QuizList']
     )
 
     quizzes.save()

@@ -1,20 +1,8 @@
 from os import environ as env
 
-from pynamodb.attributes import (ListAttribute, MapAttribute, NumberAttribute,
-                                 UnicodeAttribute)
+from pynamodb.attributes import NumberAttribute, UnicodeAttribute
 from pynamodb.models import Model
 
-
-class Question(MapAttribute):
-
-    question = UnicodeAttribute()
-    answer_index = NumberAttribute()
-    options = ListAttribute(of=UnicodeAttribute)
-
-class Quiz(MapAttribute):
-
-    quiz_name = UnicodeAttribute(null=False)
-    questions = ListAttribute(of=Question)
 
 class Quizzes(Model):
 
@@ -25,7 +13,7 @@ class Quizzes(Model):
         host = f'https://dynamodb.{region}.amazonaws.com'
 
     device_id = UnicodeAttribute(hash_key=True)
-    quizzes = ListAttribute(of=Quiz)
+    quizzes = UnicodeAttribute(null=False)
     modified_time = NumberAttribute(null=False)
 
     def save(self, *_):
