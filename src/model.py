@@ -15,7 +15,7 @@ class Quiz(MapAttribute):
 
     quiz_name = UnicodeAttribute(null=False)
     questions = ListAttribute(of=Question)
-    
+
 class Quizzes(Model):
 
     class Meta:
@@ -31,3 +31,8 @@ class Quizzes(Model):
     def save(self, *_):
         
         super(Quizzes, self).save()
+
+    def __iter__(self):
+        
+        for name, attr in self._get_attributes().items():
+            yield name, attr.serialize(getattr(self, name))

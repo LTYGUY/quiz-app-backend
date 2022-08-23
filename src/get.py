@@ -1,5 +1,4 @@
 from json import dumps
-from re import A
 
 from pynamodb.exceptions import DoesNotExist
 
@@ -19,5 +18,5 @@ def get(event: ResponseType, _) -> ResponseType:
     
     return {
         'statusCode': 200,
-        'body': dumps(quizzes)
+        'body': dumps(dict(quizzes))
     }
