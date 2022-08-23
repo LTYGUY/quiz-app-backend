@@ -5,6 +5,7 @@ from src.model import Quizzes
 def create(event, _):
 
     data = event['body']
+    print(data)
 
     if 'DeviceID' not in data:
         return error_response(422, 'DeviceID is not found')
@@ -12,12 +13,9 @@ def create(event, _):
     elif 'QuizList' not in data:
         return error_response(422, 'No quizzes were found.')
 
-    elif not data['QuizList']['QuizName']:
-        return error_response(422, 'No quiz name was found.')
-
     quiz = Quizzes(
         device_id=data['DeviceID'],
-        quiz_name=data['QuizList'],
+        quizzes=data['QuizList'],
         modified_time=data['Timestamp']
     )
 
