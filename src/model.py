@@ -25,7 +25,7 @@ class Quizzes(Model):
 
     device_id = UnicodeAttribute(hash_key=True)
     quizzes = ListAttribute(of=Quiz)
-    modified_time =UnicodeAttribute(null=False)
+    modified_time = NumberAttribute(null=False)
 
     def save(self, *_):
         
