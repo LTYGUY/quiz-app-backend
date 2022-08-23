@@ -15,7 +15,7 @@ def create(event: ResponseType, _) -> ResponseType:
     if 'DeviceID' not in data:
         return error_response(422, 'DeviceID is not found')
 
-    elif 'QuizList' not in data:
+    if 'quizzes' not in data:
         return error_response(422, 'No quizzes were found.')
 
     device_id: int = data['DeviceID']
