@@ -44,15 +44,6 @@ functions:
           path: /quizzes
           method: POST
 
-  list:
-    handler: src/list.list
-    timeout: 5
-    memorySize: 128
-    events:
-      - httpApi:
-          path: /quizzes
-          method: GET
-
   get:
     handler: src/get.get
     timeout: 5
