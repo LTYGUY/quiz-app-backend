@@ -33,6 +33,6 @@ class Quizzes(Model):
         super(Quizzes, self).save()
 
     def __iter__(self):
-        
-        for name, attr in self._get_attributes().items():
-            yield name, attr.serialize(getattr(self, name))
+
+        for name, attribute in self._get_attributes().items():
+            yield name, attribute.serialize(getattr(self, name))
