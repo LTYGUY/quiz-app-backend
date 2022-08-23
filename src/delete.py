@@ -1,10 +1,10 @@
 from pynamodb.exceptions import DeleteError, DoesNotExist
 
-from src.helpers import error_response, response
+from src.helpers import ResponseType, error_response, response
 from src.model import Quizzes
 
 
-def delete(event, context):
+def delete(event: ResponseType, _) -> ResponseType:
 
     try:
         quiz = Quizzes.get(hash_key=event['path']['id'])

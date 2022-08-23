@@ -19,7 +19,7 @@ class Quizzes(Model):
 
     class Meta:
 
-        table_name = env['DYNAMODB_TABLE']
+        table_name: str = env['DYNAMODB_TABLE']
         region = 'ap-southeast-1'
         host = f'https://dynamodb.{region}.amazonaws.com'
 
