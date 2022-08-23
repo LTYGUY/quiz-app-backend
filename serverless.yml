@@ -11,19 +11,17 @@ provider:
     cors: true
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - dynamodb:Query
-            - dynamodb:Scan
-            - dynamodb:GetItem
-            - dynamodb:PutItem
-            - dynamodb:UpdateItem
-            - dynamodb:DeleteItem
-            - dynamodb:DescribeTable
-          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
   exclude:
@@ -59,7 +57,7 @@ functions:
     memorySize: 128
     events:
       - httpApi:
-          path: /quizzes/{id}
+          path: /quizzes/{quiz_name}
           method: GET
 
   delete:
@@ -68,21 +66,19 @@ functions:
     memorySize: 128
     events:
       - httpApi:
-          path: /quizzes/{id}
+          path: /quizzes/{quiz_name}
           method: DELETE
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    QuizzesTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: quiz_name
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: quiz_name
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.DYNAMODB_TABLE}

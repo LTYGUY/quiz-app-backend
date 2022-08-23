@@ -1,13 +1,13 @@
 from pynamodb.exceptions import DoesNotExist
 
-from quizzes.helpers import error_response, respond_with_data
-from quizzes.model import Quizzes
+from src.helpers import error_response, respond_with_data
+from src.model import Quiz
 
 
 def get(event, context):
 
     try:
-        quiz = Quizzes.get(event['path']['id'])
+        quiz = Quiz.get(event['path']['id'])
 
     except DoesNotExist:
         return error_response(404, 'Quiz not found')
