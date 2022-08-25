@@ -18,5 +18,5 @@ def get(event: ResponseType, _) -> ResponseType:
 
     return {
         'statusCode': 200,
-        'body': dumps(dict(quizzes))
+        'body': dumps(quizzes)
     }
