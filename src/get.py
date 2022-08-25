@@ -1,4 +1,4 @@
-from json import dumps
+from json import dumps, loads
 
 from pynamodb.exceptions import DoesNotExist
 
@@ -9,12 +9,14 @@ from src.model import Quizzes
 def get(event: ResponseType, _) -> ResponseType:
 
     try:
-        quizzes = Quizzes.get(hash_key=event['pathParameters']['device_id'])
+        quizzes = dict(Quizzes.get(hash_key=event['pathParameters']['device_id']))
 
     except (DoesNotExist, KeyError):
         return error_response(404, 'Quiz not found')
     
+    quizzes["quizzes"] = loads(quizzes["quizzes"])
+
     return {
         'statusCode': 200,
-        'body': dict(quizzes)
+        'body': dumps(dict(quizzes))
     }
