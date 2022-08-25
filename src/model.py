@@ -21,5 +21,5 @@ class Quizzes(Model):
 
     def __iter__(self):
 
-        for name, attribute in self._get_attributes().items():
+        for name, attribute in self.get_attributes().items():
             yield name, attribute.serialize(getattr(self, name))
