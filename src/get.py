@@ -13,8 +13,7 @@ def get(event: ResponseType, _) -> ResponseType:
         quizzes["quizzes"] = loads(quizzes["quizzes"])
 
     except (DoesNotExist, KeyError):
-        return error_response(404, 'Quiz not found')
-    
+        return error_response(404, 'Quiz not found') 
 
     return {
         'statusCode': 200,
